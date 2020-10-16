@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightcard">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Enter Details of the Client"
+        android:textColor="@color/lighttext"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Full Name: "
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/phnum"
+        app:layout_constraintEnd_toStartOf="@+id/nameset"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/policyno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Policy No:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/datecom"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/phnum" />
+
+    <TextView
+        android:id="@+id/datecom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Date of Commencement:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/plan"
+        app:layout_constraintStart_toStartOf="@+id/policyno"
+        app:layout_constraintTop_toBottomOf="@+id/policyno" />
+
+    <TextView
+        android:id="@+id/datemat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Date of Maturity:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/premamt"
+        app:layout_constraintStart_toStartOf="@+id/datecom"
+        app:layout_constraintTop_toBottomOf="@+id/plan" />
+
+    <TextView
+        android:id="@+id/plan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Plan:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/datemat"
+        app:layout_constraintStart_toStartOf="@+id/datemat"
+        app:layout_constraintTop_toBottomOf="@+id/datecom" />
+
+    <TextView
+        android:id="@+id/polterm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Policy Term:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/plan"
+        app:layout_constraintEnd_toStartOf="@+id/polytermset" />
+
+    <TextView
+        android:id="@+id/payterm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Paying Term:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/asssum"
+        app:layout_constraintStart_toStartOf="@+id/plan"
+        app:layout_constraintTop_toBottomOf="@+id/dob" />
+
+    <TextView
+        android:id="@+id/asssum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Assured Sum:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/lastdate"
+        app:layout_constraintStart_toStartOf="@+id/payterm"
+        app:layout_constraintTop_toBottomOf="@+id/payterm" />
+
+    <TextView
+        android:id="@+id/premamt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Total Installment Premium:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/dob"
+        app:layout_constraintStart_toStartOf="@+id/asssum"
+        app:layout_constraintTop_toBottomOf="@+id/datemat" />
+
+    <TextView
+        android:id="@+id/premdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Due Date Premium:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/address"
+        app:layout_constraintStart_toStartOf="@+id/premamt"
+        app:layout_constraintTop_toBottomOf="@+id/lastdate" />
+
+    <TextView
+        android:id="@+id/lastdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Last Premium Date:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/premdate"
+        app:layout_constraintStart_toStartOf="@+id/premdate"
+        app:layout_constraintTop_toBottomOf="@+id/asssum" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Address:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/add"
+        app:layout_constraintStart_toStartOf="@+id/lastdate"
+        app:layout_constraintTop_toBottomOf="@+id/premdate" />
+
+    <TextView
+        android:id="@+id/phnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Phone Number:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/policyno"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/dob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Date of Birth:"
+        android:textColor="@color/lighttext"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/payterm"
+        app:layout_constraintStart_toStartOf="@+id/phnum"
+        app:layout_constraintTop_toBottomOf="@+id/premamt" />
+
+    <EditText
+        android:id="@+id/nameset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/name"
+        app:layout_constraintTop_toTopOf="@+id/name" />
+
+    <EditText
+        android:id="@+id/phnumset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="@+id/phnum"
+        app:layout_constraintEnd_toEndOf="@+id/nameset"
+        app:layout_constraintStart_toEndOf="@+id/phnum"
+        app:layout_constraintTop_toTopOf="@+id/phnum" />
+
+    <EditText
+        android:id="@+id/dobset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textColor="@color/lighttext"
+        app:layout_constraintBottom_toBottomOf="@+id/dob"
+        app:layout_constraintEnd_toEndOf="@+id/phnumset"
+        app:layout_constraintStart_toEndOf="@+id/dob"
+        app:layout_constraintTop_toTopOf="@+id/dob" />
+
+    <EditText
+        android:id="@+id/polynoset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/policyno"
+        app:layout_constraintEnd_toEndOf="@+id/dobset"
+        app:layout_constraintStart_toEndOf="@+id/policyno"
+        app:layout_constraintTop_toTopOf="@+id/policyno" />
+
+    <EditText
+        android:id="@+id/datecomset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:ems="7"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/datecom"
+        app:layout_constraintEnd_toEndOf="@+id/polynoset"
+        app:layout_constraintStart_toEndOf="@+id/datecom"
+        app:layout_constraintTop_toTopOf="@+id/datecom" />
+
+    <EditText
+        android:id="@+id/planset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/plan"
+        app:layout_constraintEnd_toStartOf="@+id/polterm"
+        app:layout_constraintStart_toEndOf="@+id/plan"
+        app:layout_constraintTop_toTopOf="@+id/plan" />
+
+    <EditText
+        android:id="@+id/polytermset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="4"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/polterm"
+        app:layout_constraintEnd_toEndOf="@+id/datecomset"
+        app:layout_constraintTop_toTopOf="@+id/polterm" />
+
+    <EditText
+        android:id="@+id/datematset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:ems="9"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/datemat"
+        app:layout_constraintEnd_toEndOf="@+id/polytermset"
+        app:layout_constraintStart_toEndOf="@+id/datemat"
+        app:layout_constraintTop_toTopOf="@+id/datemat" />
+
+    <EditText
+        android:id="@+id/paytermset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="51dp"
+        android:ems="9"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/payterm"
+        app:layout_constraintEnd_toEndOf="@+id/datematset"
+        app:layout_constraintStart_toEndOf="@+id/payterm"
+        app:layout_constraintTop_toTopOf="@+id/payterm" />
+
+    <EditText
+        android:id="@+id/asssumset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:ems="9"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/asssum"
+        app:layout_constraintEnd_toEndOf="@+id/paytermset"
+        app:layout_constraintStart_toEndOf="@+id/asssum"
+        app:layout_constraintTop_toTopOf="@+id/asssum" />
+
+    <EditText
+        android:id="@+id/totpremset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:ems="7"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/premamt"
+        app:layout_constraintEnd_toEndOf="@+id/asssumset"
+        app:layout_constraintStart_toEndOf="@+id/premamt"
+        app:layout_constraintTop_toTopOf="@+id/premamt" />
+
+    <EditText
+        android:id="@+id/premdateset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:ems="8"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/premdate"
+        app:layout_constraintEnd_toEndOf="@+id/totpremset"
+        app:layout_constraintStart_toEndOf="@+id/premdate"
+        app:layout_constraintTop_toTopOf="@+id/premdate" />
+
+    <EditText
+        android:id="@+id/lastdateset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:ems="8"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="@+id/lastdate"
+        app:layout_constraintEnd_toEndOf="@+id/premdateset"
+        app:layout_constraintStart_toEndOf="@+id/lastdate"
+        app:layout_constraintTop_toTopOf="@+id/lastdate" />
+
+    <EditText
+        android:id="@+id/addset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:ems="11"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/address"
+        app:layout_constraintEnd_toEndOf="@+id/lastdateset"
+        app:layout_constraintStart_toEndOf="@+id/address"
+        app:layout_constraintTop_toTopOf="@+id/address" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:text="Add"
+        android:background="@drawable/round2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toBottomOf="@+id/address" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:background="@drawable/round2"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/add"
+        app:layout_constraintEnd_toStartOf="@+id/add"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

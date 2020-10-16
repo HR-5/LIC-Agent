@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "255403724461",
+    "firebase_url": "https://lic-agent-ca20f.firebaseio.com",
+    "project_id": "lic-agent-ca20f",
+    "storage_bucket": "lic-agent-ca20f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255403724461:android:f71625d927830e59964024",
+        "android_client_info": {
+          "package_name": "com.example.licagent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255403724461-u936t05h18bsi4af8719qtvqkfdd9srb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.licagent",
+            "certificate_hash": "c647ec01af16362d43fd2c9593f6602e9047ab23"
+          }
+        },
+        {
+          "client_id": "255403724461-j80lc84f21mhlc6bvpqnttfnspfpamae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Ofje-ZHrkmHWq-dmBSLdjTtJV4SbJ80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255403724461-j80lc84f21mhlc6bvpqnttfnspfpamae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
