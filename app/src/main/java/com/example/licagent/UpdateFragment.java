@@ -190,8 +190,6 @@ public class UpdateFragment extends Fragment {
         totPrem = Long.parseLong(premamtset.getText().toString());
         if(oldId != polyno)
             notebookRef.document("My clients").collection("Client Data").document(String.valueOf(oldId)).delete();
-        ClientClass clientClass = new ClientClass(name, dob, datecomm, datemat, dueDate, lastDate, address,
-                phnum, plan, polyno, polyterm, payterm, assSum, totPrem);
         notebookRef.document("My clients").collection("Client Data").document(String.valueOf(polyno)).set(clientClass)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -220,11 +218,11 @@ public class UpdateFragment extends Fragment {
 
     private void setVar(){
         name = clientClass.getName();
-        dob = clientClass.getDob();
-        datecomm = clientClass.getDatecomm();
-        datemat = clientClass.getDatemat();
-        dueDate = clientClass.getDueDate();
-        lastDate = clientClass.getLastDate();
+//        dob = clientClass.getDob();
+//        datecomm = clientClass.getDatecomm();
+//        datemat = clientClass.getDatemat();
+//        dueDate = clientClass.getDueDate();
+//        lastDate = clientClass.getLastDate();
         address = clientClass.getAddress();
         phnum = clientClass.getPhnum();
         plan = clientClass.getPlan();

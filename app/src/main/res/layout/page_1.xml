@@ -27,13 +27,13 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Full Name: "
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/phnum"
                 app:layout_constraintEnd_toStartOf="@+id/nameset"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textView4" />
 
             <EditText
                 android:id="@+id/nameset"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -55,7 +55,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Phone Number:"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/policyno"
                 app:layout_constraintStart_toStartOf="@+id/name"
@@ -68,7 +68,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Policy No:"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/plan"
                 app:layout_constraintStart_toStartOf="@+id/phnum"
@@ -81,7 +81,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Plan:"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/polterm"
                 app:layout_constraintStart_toStartOf="@+id/policyno"
@@ -94,7 +94,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Policy Term:"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/plan"
@@ -144,6 +144,20 @@
                 app:layout_constraintBottom_toBottomOf="@+id/polterm"
                 app:layout_constraintStart_toEndOf="@+id/polterm"
                 app:layout_constraintTop_toTopOf="@+id/polterm" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Page 1 of 3"
+                android:textColor="@color/backc"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

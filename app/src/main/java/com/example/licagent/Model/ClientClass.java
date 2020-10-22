@@ -1,22 +1,19 @@
 package com.example.licagent.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ClientClass implements Serializable {
 
-    private String name, dob, datecomm, datemat, dueDate, lastDate, address;
+    private String name, address;
     private long phnum, plan, polyno, polyterm, payterm, assSum, totPrem;
+    private Date  dob, datecomm, datemat, dueDate, lastDate;
 
     public ClientClass() {
     }
 
-    public ClientClass(String name, String dob, String datecomm, String datemat, String dueDate, String lastDate, String address, long phnum, long plan, long polyno, long polyterm, long payterm, long assSum, long totPrem) {
+    public ClientClass(String name, String address, long phnum, long plan, long polyno, long polyterm, long payterm, long assSum, long totPrem, Date dob, Date datecomm, Date datemat, Date dueDate, Date lastDate) {
         this.name = name;
-        this.dob = dob;
-        this.datecomm = datecomm;
-        this.datemat = datemat;
-        this.dueDate = dueDate;
-        this.lastDate = lastDate;
         this.address = address;
         this.phnum = phnum;
         this.plan = plan;
@@ -25,6 +22,11 @@ public class ClientClass implements Serializable {
         this.payterm = payterm;
         this.assSum = assSum;
         this.totPrem = totPrem;
+        this.dob = dob;
+        this.datecomm = datecomm;
+        this.datemat = datemat;
+        this.dueDate = dueDate;
+        this.lastDate = lastDate;
     }
 
     public String getName() {
@@ -35,43 +37,43 @@ public class ClientClass implements Serializable {
         this.name = name;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 
-    public String getDatecomm() {
+    public Date getDatecomm() {
         return datecomm;
     }
 
-    public void setDatecomm(String datecomm) {
+    public void setDatecomm(Date datecomm) {
         this.datecomm = datecomm;
     }
 
-    public String getDatemat() {
+    public Date getDatemat() {
         return datemat;
     }
 
-    public void setDatemat(String datemat) {
+    public void setDatemat(Date datemat) {
         this.datemat = datemat;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
-    public String getLastDate() {
+    public Date getLastDate() {
         return lastDate;
     }
 
-    public void setLastDate(String lastDate) {
+    public void setLastDate(Date lastDate) {
         this.lastDate = lastDate;
     }
 

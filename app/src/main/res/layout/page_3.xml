@@ -27,13 +27,11 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Total Installment: \nPremium"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/payterm"
-                app:layout_constraintEnd_toStartOf="@+id/totpremset"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="@+id/payterm"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
                 android:id="@+id/payterm"
@@ -42,10 +40,10 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Paying Term:"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/asssum"
-                app:layout_constraintStart_toStartOf="@+id/premamt"
+                app:layout_constraintStart_toStartOf="@+id/asssum"
                 app:layout_constraintTop_toBottomOf="@+id/premamt" />
 
             <TextView
@@ -55,37 +53,38 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Assured Sum:"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/payterm"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toTopOf="@+id/address"
+                app:layout_constraintEnd_toStartOf="@+id/asssumset"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/payterm" />
 
             <TextView
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Address:"
                 android:textColor="@color/lighttext"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/addset"
-                app:layout_constraintStart_toStartOf="@+id/asssum"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/asssum" />
 
             <EditText
                 android:id="@+id/totpremset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:ems="7"
-                android:hint="Total Premium"
+                android:ems="9"
+                android:hint="In Rupees"
                 android:inputType="numberSigned"
                 app:layout_constraintBottom_toBottomOf="@+id/premamt"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toEndOf="@+id/premamt"
                 app:layout_constraintTop_toTopOf="@+id/premamt" />
 
@@ -93,11 +92,12 @@
                 android:id="@+id/paytermset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:ems="9"
-                android:hint="Enter Paying Term Month"
+                android:hint="In Months"
                 android:inputType="numberSigned"
                 app:layout_constraintBottom_toBottomOf="@+id/payterm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toEndOf="@+id/payterm"
                 app:layout_constraintTop_toTopOf="@+id/payterm" />
 
@@ -105,11 +105,12 @@
                 android:id="@+id/asssumset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
                 android:ems="9"
-                android:hint="Enter Assuresd sum"
+                android:hint="In Rupees"
                 android:inputType="numberSigned"
                 app:layout_constraintBottom_toBottomOf="@+id/asssum"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/asssum"
                 app:layout_constraintTop_toTopOf="@+id/asssum" />
 
@@ -117,15 +118,31 @@
                 android:id="@+id/addset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:ems="15"
+                android:ems="14"
+                android:gravity="top|left"
                 android:hint="Enter Address"
                 android:inputType="textMultiLine"
-                android:minLines="3"
-                android:textAlignment="textStart"
+                android:lines="3"
+                android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/address"
+                app:layout_constraintEnd_toEndOf="@+id/totpremset"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="@+id/asssum"
                 app:layout_constraintTop_toBottomOf="@+id/address" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Page 3 of 3"
+                android:textColor="@color/backc"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

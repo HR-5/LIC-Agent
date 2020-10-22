@@ -34,11 +34,6 @@ import static com.example.licagent.AddClient.Page1.phnumset;
 import static com.example.licagent.AddClient.Page1.planset;
 import static com.example.licagent.AddClient.Page1.polynoset;
 import static com.example.licagent.AddClient.Page1.polytermset;
-import static com.example.licagent.AddClient.Page2.datecommset;
-import static com.example.licagent.AddClient.Page2.datematset;
-import static com.example.licagent.AddClient.Page2.dobset;
-import static com.example.licagent.AddClient.Page2.dueDateset;
-import static com.example.licagent.AddClient.Page2.lastedateset;
 import static com.example.licagent.AddClient.Page3.addressSet;
 import static com.example.licagent.AddClient.Page3.assSumset;
 import static com.example.licagent.AddClient.Page3.paytermset;
@@ -53,7 +48,7 @@ public class AddDetailFragment extends Fragment implements View.OnClickListener 
     ViewPager viewPager;
     Button addBtn, back;
     int pos = 0;
-    ClientClass clientClass = new ClientClass();
+    protected static ClientClass clientClass = new ClientClass();
 
     public AddDetailFragment() {
         // Required empty public constructor
@@ -88,7 +83,7 @@ public class AddDetailFragment extends Fragment implements View.OnClickListener 
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                return false;
+                return true;
             }
         });
         back.setText("Back");
@@ -108,44 +103,12 @@ public class AddDetailFragment extends Fragment implements View.OnClickListener 
                         .commit();
             }
         });
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(nameset.getText()) || TextUtils.isEmpty(phnumset.getText())
-                        || TextUtils.isEmpty(polynoset.getText()) || TextUtils.isEmpty(datecommset.getText())
-                        || TextUtils.isEmpty(planset.getText()) || TextUtils.isEmpty(polytermset.getText())
-                        || TextUtils.isEmpty(datematset.getText()) || TextUtils.isEmpty(premamtset.getText())
-                        || TextUtils.isEmpty(dobset.getText()) || TextUtils.isEmpty(paytermset.getText())
-                        || TextUtils.isEmpty(assSumset.getText()) || TextUtils.isEmpty(lastedateset.getText())
-                        || TextUtils.isEmpty(dueDateset.getText()) || TextUtils.isEmpty(addressSet.getText())) {
-                    Toast.makeText(getContext(), "Enter All Fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    addData();
-                }
-            }
-        });
+      addBtn.setOnClickListener(this);
     }
 
     public void addData() {
-        String name, dob, datecomm, datemat, dueDate, lastDate, address;
-        long phnum, plan, polyno, polyterm, payterm, assSum, totPrem;
-
-        dob = dobset.getText().toString();
-        datecomm = datecommset.getText().toString();
-        datemat = datematset.getText().toString();
-        dueDate = dueDateset.getText().toString();
-        lastDate = lastedateset.getText().toString();
-        address = addressSet.getText().toString();
-        phnum = Long.parseLong(phnumset.getText().toString());
-        plan = Long.parseLong(planset.getText().toString());
-        polyno = Long.parseLong(polynoset.getText().toString());
-        polyterm = Long.parseLong(polytermset.getText().toString());
-        payterm = Long.parseLong(paytermset.getText().toString());
-        assSum = Long.parseLong(assSumset.getText().toString());
-        totPrem = Long.parseLong(premamtset.getText().toString());
-        ClientClass clientClass = new ClientClass("name", dob, datecomm, datemat, dueDate, lastDate, address,
-                phnum, plan, polyno, polyterm, payterm, assSum, totPrem);
-        notebookRef.document("My clients").collection("Client Data").document(String.valueOf(polyno)).set(clientClass)
+        notebookRef.document("My clients").collection("Client Data").document(String.valueOf(clientClass.getPolyno()))
+                .set(clientClass)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -185,21 +148,26 @@ public class AddDetailFragment extends Fragment implements View.OnClickListener 
                     }
                     viewPager.setCurrentItem(pos, true);
                 } else if (pos == 1) {
-                    if (TextUtils.isEmpty(datecommset.getText()) || TextUtils.isEmpty(datematset.getText())
-                            || TextUtils.isEmpty(dobset.getText()) || TextUtils.isEmpty(lastedateset.getText())
-                            || TextUtils.isEmpty(dueDateset.getText())){
-                        Toast.makeText(getContext(), "Enter All Fields", Toast.LENGTH_SHORT).show();
+                    if(clientClass.getDatecomm()!=null||clientClass.getDatemat()!=null||clientClass.getDob()!=null||clientClass.getDueDate()!=null
+                            ||clientClass.getLastDate()!=null){
+                        pos++;
                     }
                     else {
-//                        clientClass.setDatecomm();
-//                        clientClass.setDatemat();
-//                        clientClass.setDob();
-//                        clientClass.setDueDate();
-//                        clientClass.setLastDate();
-                        pos++;
+                        Toast.makeText(getContext(), "Enter All Fields", Toast.LENGTH_SHORT).show();
                     }
                     viewPager.setCurrentItem(pos, true);
                 } else if (pos == 2) {
+                    if(TextUtils.isEmpty(premamtset.getText())||TextUtils.isEmpty(paytermset.getText())
+                            ||TextUtils.isEmpty(assSumset.getText())||TextUtils.isEmpty(addressSet.getText())){
+                        Toast.makeText(getContext(), "Enter All Fields", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        clientClass.setAddress(addressSet.getText().toString());
+                        clientClass.setPayterm(Long.parseLong(paytermset.getText().toString()));
+                        clientClass.setTotPrem(Long.parseLong(premamtset.getText().toString()));
+                        clientClass.setAssSum(Long.parseLong(assSumset.getText().toString()));
+                        addData();
+                    }
 
                 }
         }

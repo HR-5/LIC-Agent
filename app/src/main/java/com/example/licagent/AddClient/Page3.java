@@ -46,6 +46,7 @@ public class Page3 extends Fragment {
         paytermset = (EditText) v.findViewById(R.id.paytermset);
         assSumset = (EditText) v.findViewById(R.id.asssumset);
         addressSet = (EditText) v.findViewById(R.id.addset);
+
         return v;
     }
 }
