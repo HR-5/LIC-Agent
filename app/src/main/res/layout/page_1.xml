@@ -1,164 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp">
+    android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="15dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="5dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Full Name: "
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/phnum"
-                app:layout_constraintEnd_toStartOf="@+id/nameset"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView4" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/nameset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/name"
-                app:layout_constraintTop_toTopOf="@+id/name" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:text="Page 1 of 3"
+                    android:textColor="@color/backc"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/phnum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Phone Number:"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/policyno"
-                app:layout_constraintStart_toStartOf="@+id/name"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/policyno"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Policy No:"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/plan"
-                app:layout_constraintStart_toStartOf="@+id/phnum"
-                app:layout_constraintTop_toBottomOf="@+id/phnum" />
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                       
+                        android:text="Full Name: "
+                        android:textColor="@color/lighttext"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/plan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Plan:"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/polterm"
-                app:layout_constraintStart_toStartOf="@+id/policyno"
-                app:layout_constraintTop_toBottomOf="@+id/policyno" />
+                    <EditText
+                        android:id="@+id/nameset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/name"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@+id/name"
+                        android:ems="10"
+                        android:hint="Enter the name"
+                        android:inputType="textPersonName"
+                        android:textSize="16sp" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/polterm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Policy Term:"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/plan"
-                app:layout_constraintTop_toBottomOf="@+id/plan" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
 
-            <EditText
-                android:id="@+id/phnumset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:ems="10"
-                android:inputType="phone"
-                app:layout_constraintBottom_toBottomOf="@+id/phnum"
-                app:layout_constraintStart_toEndOf="@+id/phnum"
-                app:layout_constraintTop_toTopOf="@+id/phnum" />
+                    <TextView
+                        android:id="@+id/phnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                       
+                        android:text="Phone Number:"
+                        android:textColor="@color/lighttext"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/polynoset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:ems="10"
-                android:inputType="numberSigned"
-                app:layout_constraintBottom_toBottomOf="@+id/policyno"
-                app:layout_constraintStart_toEndOf="@+id/policyno"
-                app:layout_constraintTop_toTopOf="@+id/policyno" />
+                    <EditText
+                        android:id="@+id/phnumset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="Enter phone number"
+                        android:inputType="phone" />
+                </LinearLayout>
 
-            <EditText
-                android:id="@+id/planset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="numberSigned"
-                app:layout_constraintBottom_toBottomOf="@+id/plan"
-                app:layout_constraintEnd_toEndOf="@+id/polynoset"
-                app:layout_constraintHorizontal_bias="0.258"
-                app:layout_constraintStart_toEndOf="@+id/plan"
-                app:layout_constraintTop_toTopOf="@+id/plan" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
 
-            <EditText
-                android:id="@+id/polytermset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:ems="10"
-                android:inputType="numberSigned"
-                app:layout_constraintBottom_toBottomOf="@+id/polterm"
-                app:layout_constraintStart_toEndOf="@+id/polterm"
-                app:layout_constraintTop_toTopOf="@+id/polterm" />
+                    <TextView
+                        android:id="@+id/policyno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                       
+                        android:text="Policy No:"
+                        android:textColor="@color/lighttext"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Page 1 of 3"
-                android:textColor="@color/backc"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                    <EditText
+                        android:id="@+id/polynoset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:hint="Enter policy number"
+                        android:inputType="numberSigned"
+                        app:layout_constraintBottom_toBottomOf="@+id/policyno"
+                        app:layout_constraintStart_toEndOf="@+id/policyno"
+                        app:layout_constraintTop_toTopOf="@+id/policyno" />
+                </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/plan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                       
+                        android:text="Plan:"
+                        android:textColor="@color/lighttext"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/planset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:ems="10"
+                        android:hint="Enter plan"
+                        android:inputType="numberSigned" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp">
+
+                    <TextView
+                        android:id="@+id/polterm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                       
+                        android:text="Policy Term:"
+                        android:textColor="@color/lighttext"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/plan"
+                        app:layout_constraintTop_toBottomOf="@+id/plan" />
+
+
+                    <EditText
+                        android:id="@+id/polytermset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:hint="In Months"
+                        android:inputType="numberSigned"
+                        app:layout_constraintBottom_toBottomOf="@+id/polterm"
+                        app:layout_constraintStart_toEndOf="@+id/polterm"
+                        app:layout_constraintTop_toTopOf="@+id/polterm" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</LinearLayout>

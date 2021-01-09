@@ -21,24 +21,41 @@ import android.widget.Toast;
 import com.example.licagent.Model.ClientClass;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.example.licagent.AddClient.AddDetailFragment.*;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Objects;
+
+import static com.example.licagent.DisplayFragment.disFrame;
+import static com.example.licagent.DisplayFragment.disRecyclerView;
+import static com.example.licagent.MainActivity.viewPagerAdapter;
+import static com.example.licagent.MainActivity.viewPagerMain;
+import static com.example.licagent.NotificationClient.notFrame;
+import static com.example.licagent.NotificationClient.notRecyclerview;
 
 
-public class UpdateFragment extends Fragment {
+public class UpdateFragment extends Fragment implements View.OnClickListener {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference notebookRef = db.collection("My Client");
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     EditText nameset, phnumset, polynoset, datecommset, planset, polytermset, datematset,
             premamtset, dobset, paytermset, assSumset, lastedateset, dueDateset, addressSet;
-    Button addBtn,cancelBtn;
+    Button addBtn, backbtn, editbtn;
     boolean edit;
     String name, dob, datecomm, datemat, dueDate, lastDate, address;
     long phnum, plan, polyno, polyterm, payterm, assSum, totPrem;
-    ClientClass clientClass;
+    ClientClass clientClass,clientClass2 = new ClientClass();
     long oldId;
+    CollectionReference notebookRef;
     TextView title;
 
     public UpdateFragment() {
@@ -58,8 +75,10 @@ public class UpdateFragment extends Fragment {
         super.onCreate(savedInstanceState);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("flag",0);
+        editor.putInt("flag", 0);
         editor.apply();
+        String userId = user.getUid();
+        notebookRef = db.collection(userId);
         clientClass = new ClientClass();
         if (getArguments() != null) {
             clientClass = (ClientClass) getArguments().getSerializable("client");
@@ -70,7 +89,7 @@ public class UpdateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.client_details, container, false);
+        View v = inflater.inflate(R.layout.client_detail, container, false);
         nameset = (EditText) v.findViewById(R.id.nameset);
         phnumset = (EditText) v.findViewById(R.id.phnumset);
         polynoset = (EditText) v.findViewById(R.id.polynoset);
@@ -85,12 +104,9 @@ public class UpdateFragment extends Fragment {
         lastedateset = (EditText) v.findViewById(R.id.lastdateset);
         dueDateset = (EditText) v.findViewById(R.id.premdateset);
         addressSet = (EditText) v.findViewById(R.id.addset);
-        title = (TextView) v.findViewById(R.id.title);
-        title.setText("Client Details");
-        addBtn = (Button) v.findViewById(R.id.add);
-        cancelBtn = (Button) v.findViewById(R.id.cancel);
-        cancelBtn.setText("Back");
-        addBtn.setText("Edit");
+        addBtn = v.findViewById(R.id.update);
+        backbtn = v.findViewById(R.id.back);
+        editbtn = v.findViewById(R.id.edit);
         edit = false;
         setEdit();
         setVar();
@@ -101,24 +117,12 @@ public class UpdateFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DisplayFragment fragment = new DisplayFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.conta,fragment)
-                        .commit();
-            }
-        });
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                update();
-            }
-        });
+        addBtn.setOnClickListener(this);
+        backbtn.setOnClickListener(this);
+        editbtn.setOnClickListener(this);
     }
-    private void setEdit(){
+
+    private void setEdit() {
         nameset.setClickable(edit);
         phnumset.setClickable(edit);
         polynoset.setClickable(edit);
@@ -148,81 +152,89 @@ public class UpdateFragment extends Fragment {
         dueDateset.setFocusableInTouchMode(edit);
         addressSet.setFocusableInTouchMode(edit);
     }
-    private void update(){
-        edit = true;
-        title.setText("Edit Details");
-        cancelBtn.setVisibility(View.VISIBLE);
-        addBtn.setText("Update");
-        setEdit();
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TextUtils.isEmpty(nameset.getText())||TextUtils.isEmpty(phnumset.getText())
-                        ||TextUtils.isEmpty(polynoset.getText())||TextUtils.isEmpty(datecommset.getText())
-                        ||TextUtils.isEmpty(planset.getText())||TextUtils.isEmpty(polytermset.getText())
-                        ||TextUtils.isEmpty(datematset.getText())||TextUtils.isEmpty(premamtset.getText())
-                        ||TextUtils.isEmpty(dobset.getText())||TextUtils.isEmpty(paytermset.getText())
-                        ||TextUtils.isEmpty(assSumset.getText())||TextUtils.isEmpty(lastedateset.getText())
-                        ||TextUtils.isEmpty(dueDateset.getText())||TextUtils.isEmpty(addressSet.getText())){
-                    Toast.makeText(getContext(),"Enter Valid Data",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    addData();
-                }
-            }
-        });
+
+    private void update() throws ParseException {
+        if (TextUtils.isEmpty(nameset.getText()) || TextUtils.isEmpty(phnumset.getText())
+                || TextUtils.isEmpty(polynoset.getText()) || TextUtils.isEmpty(datecommset.getText())
+                || TextUtils.isEmpty(planset.getText()) || TextUtils.isEmpty(polytermset.getText())
+                || TextUtils.isEmpty(datematset.getText()) || TextUtils.isEmpty(premamtset.getText())
+                || TextUtils.isEmpty(dobset.getText()) || TextUtils.isEmpty(paytermset.getText())
+                || TextUtils.isEmpty(assSumset.getText()) || TextUtils.isEmpty(lastedateset.getText())
+                || TextUtils.isEmpty(dueDateset.getText()) || TextUtils.isEmpty(addressSet.getText())) {
+            Toast.makeText(getContext(), "Enter Valid Data", Toast.LENGTH_SHORT).show();
+        } else {
+            addData();
+        }
+
     }
 
-    public void addData() {
-        name = nameset.getText().toString();
+    public void addData() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        clientClass2.setName(nameset.getText().toString());
+        clientClass2.setPhnum(Long.parseLong(phnumset.getText().toString()));
+        clientClass2.setPlan(Long.parseLong(planset.getText().toString()));
+        clientClass2.setPolyno(Long.parseLong(polynoset.getText().toString()));
+        clientClass2.setPolyterm(Long.parseLong(polytermset.getText().toString()));
         dob = dobset.getText().toString();
+        clientClass2.setDob(simpleDateFormat.parse(dob));
         datecomm = datecommset.getText().toString();
+        clientClass2.setDatecomm(simpleDateFormat.parse(datecomm));
         datemat = datematset.getText().toString();
+        clientClass2.setDatemat(simpleDateFormat.parse(datemat));
         dueDate = dueDateset.getText().toString();
+        clientClass2.setDueDate(simpleDateFormat.parse(dueDate));
         lastDate = lastedateset.getText().toString();
-        address = addressSet.getText().toString();
-        phnum = Long.parseLong(phnumset.getText().toString());
-        plan = Long.parseLong(planset.getText().toString());
-        polyno = Long.parseLong(polynoset.getText().toString());
-        polyterm = Long.parseLong(polytermset.getText().toString());
-        payterm = Long.parseLong(paytermset.getText().toString());
-        assSum = Long.parseLong(assSumset.getText().toString());
-        totPrem = Long.parseLong(premamtset.getText().toString());
-        if(oldId != polyno)
+        clientClass2.setLastDate(simpleDateFormat.parse(lastDate));
+        clientClass2.setAddress(addressSet.getText().toString());
+        clientClass2.setPayterm(Long.parseLong(paytermset.getText().toString()));
+        clientClass2.setTotPrem(Long.parseLong(premamtset.getText().toString()));
+        clientClass2.setAssSum(Long.parseLong(assSumset.getText().toString()));
+        if(clientClass.getPolyterm() == clientClass2.getPolyterm() && clientClass.getPayterm() == clientClass2.getPayterm()){
+            clientClass2.setPremDates((ArrayList<Date>) clientClass.getPremDates().clone());
+        }
+        else
+            calculatePremDates();
+        if (oldId != clientClass2.getPolyno())
             notebookRef.document("My clients").collection("Client Data").document(String.valueOf(oldId)).delete();
-        notebookRef.document("My clients").collection("Client Data").document(String.valueOf(polyno)).set(clientClass)
+        backbtn.performClick();
+        notebookRef.document("My clients").collection("Client Data").document(String.valueOf(clientClass2.getPolyno())).set(clientClass2)
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(),"Process Failed",Toast.LENGTH_SHORT).show();
-                        DisplayFragment fragment = new DisplayFragment();
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.conta,fragment)
-                                .commit();
+                        Toast.makeText(getContext(), "Process Failed", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 })
-        .addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(getContext(),"Client Updated",Toast.LENGTH_SHORT).show();
-                DisplayFragment fragment = new DisplayFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.conta,fragment)
-                        .commit();
-            }
-        });
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Client Updated", Toast.LENGTH_SHORT).show();
+                        ((MainActivity) getActivity()).setupViewPager();
+                    }
+                });
     }
 
-    private void setVar(){
+    private void calculatePremDates() {
+        ArrayList<Date> premDates = new ArrayList<>();
+        for (int i = 1; i * clientClass2.getPolyterm() < clientClass2.getPayterm() * 12; i++) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(clientClass2.getDatecomm());
+            int m = (int) (i * clientClass2.getPolyterm());
+            calendar.add(Calendar.MONTH, m);
+            premDates.add(calendar.getTime());
+        }
+        clientClass2.setPremDates(premDates);
+    }
+
+
+    private void setVar() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         name = clientClass.getName();
-//        dob = clientClass.getDob();
-//        datecomm = clientClass.getDatecomm();
-//        datemat = clientClass.getDatemat();
-//        dueDate = clientClass.getDueDate();
-//        lastDate = clientClass.getLastDate();
+        dob = simpleDateFormat.format(clientClass.getDob());
+        datecomm = simpleDateFormat.format(clientClass.getDatecomm());
+        datemat = simpleDateFormat.format(clientClass.getDatemat());
+        dueDate = simpleDateFormat.format(clientClass.getDueDate());
+        lastDate = simpleDateFormat.format(clientClass.getLastDate());
         address = clientClass.getAddress();
         phnum = clientClass.getPhnum();
         plan = clientClass.getPlan();
@@ -233,7 +245,7 @@ public class UpdateFragment extends Fragment {
         totPrem = clientClass.getTotPrem();
     }
 
-    private void setText(){
+    private void setText() {
         nameset.setText(name);
         phnumset.setText(String.valueOf(phnum));
         polynoset.setText(String.valueOf(polyno));
@@ -248,5 +260,36 @@ public class UpdateFragment extends Fragment {
         lastedateset.setText(lastDate);
         dueDateset.setText(dueDate);
         addressSet.setText(address);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.edit:
+                edit = true;
+                editbtn.setEnabled(false);
+                addBtn.setVisibility(View.VISIBLE);
+                setEdit();
+                break;
+            case R.id.back:
+                if (MainActivity.pos == 0) {
+                    disRecyclerView.setVisibility(View.VISIBLE);
+                    disFrame.setVisibility(View.GONE);
+                } else if (MainActivity.pos == 1) {
+                    notRecyclerview.setVisibility(View.VISIBLE);
+                    notFrame.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.update:
+                editbtn.setEnabled(true);
+                addBtn.setVisibility(View.GONE);
+                edit = false;
+                setEdit();
+                try {
+                    update();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.licagent.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ClientClass implements Serializable {
@@ -8,6 +9,7 @@ public class ClientClass implements Serializable {
     private String name, address;
     private long phnum, plan, polyno, polyterm, payterm, assSum, totPrem;
     private Date  dob, datecomm, datemat, dueDate, lastDate;
+    ArrayList<Date> premDates = new ArrayList<>();
 
     public ClientClass() {
     }
@@ -27,6 +29,15 @@ public class ClientClass implements Serializable {
         this.datemat = datemat;
         this.dueDate = dueDate;
         this.lastDate = lastDate;
+    }
+
+
+    public ArrayList<Date> getPremDates() {
+        return premDates;
+    }
+
+    public void setPremDates(ArrayList<Date> premDates) {
+        this.premDates = premDates;
     }
 
     public String getName() {

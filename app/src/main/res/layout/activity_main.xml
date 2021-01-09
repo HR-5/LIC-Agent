@@ -2,7 +2,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,26 +14,93 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/lightcard"
-            android:elevation="4dp">
+            android:background="@color/blue2">
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:gravity="center"
-                android:minHeight="?actionBarSize"
-                android:text="LIC Agent"
-                android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:minHeight="?actionBarSize"
+                    android:text="LIC Agent"
+                    android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignRight="@+id/menu"
+                    android:layout_marginRight="40dp"
+                    android:src="@drawable/person" />
+
+                <ImageView
+                    android:id="@+id/menu"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/nav" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/lic_"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
         </androidx.appcompat.widget.Toolbar>
 
-        <FrameLayout
-            android:id="@+id/conta"
+
+        <com.example.licagent.TypeWriter
+            android:id="@+id/type"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@color/blue2"
+            android:fontFamily="@font/typewriter"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_back"
+                app:tabIndicatorFullWidth="true"
+                app:tabSelectedTextColor="@color/backc"
+                app:tabTextColor="@color/backc" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightback"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

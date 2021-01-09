@@ -12,11 +12,6 @@ import android.widget.TextView;
 
 import com.example.licagent.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Page3#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Page3 extends Fragment {
 
     protected  static EditText premamtset,paytermset, assSumset, addressSet;

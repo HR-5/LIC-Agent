@@ -17,10 +17,12 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.licagent.AddClient.AddDetailFragment;
 import com.example.licagent.Model.ClientClass;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +35,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DisplayFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -40,7 +44,12 @@ public class DisplayFragment extends Fragment {
     private CollectionReference notebookRef;
     ClientAdapter adapter;
     String userId;
-    ArrayList<ClientClass> client = new ArrayList<>();
+    double monthInsec = 30*24*3600;
+    public static ArrayList<ClientClass> premClient = new ArrayList<>();
+    public static ArrayList<ClientClass> client = new ArrayList<>();
+    public static FrameLayout disFrame;
+    public static RecyclerView disRecyclerView;
+    private ShimmerFrameLayout mShimmerViewContainer;
 
     public DisplayFragment() {
         // Required empty public constructor
@@ -80,56 +89,55 @@ public class DisplayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_layout, container, false);
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.attrecycler);
+        disRecyclerView = (RecyclerView) v.findViewById(R.id.attrecycler);
+        disFrame = v.findViewById(R.id.detail_frame);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         adapter = new ClientAdapter(getActivity(),fragmentManager);
-        new ItemTouchHelper(simpleCallback).attachToRecyclerView(recyclerView);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(disRecyclerView);
+        disRecyclerView.setAdapter(adapter);
+        mShimmerViewContainer = v.findViewById(R.id.shimmerFrameLayout);
+        disRecyclerView.setHasFixedSize(true);
         final GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
-        recyclerView.setLayoutManager(layoutManager);
-        FloatingActionButton fab = v.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddDetailFragment fragment = new AddDetailFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.conta,fragment)
-                        .addToBackStack("add")
-                        .commit();
-            }
-        });
+        disRecyclerView.setLayoutManager(layoutManager);
         return v;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mShimmerViewContainer.startShimmerAnimation();
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
         getdata();
     }
+    @Override
+    public void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+    }
+
     private void getdata(){
-        Query query = db.collection(userId).document("My Clients").collection("Client Data");
         client.clear();
+        premClient.clear();
+        premClient = new ArrayList<>();
         notebookRef.document("My clients").collection("Client Data")
                 .get()
         .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
                 for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()) {
                     DocumentSnapshot documentSnapshot = dc.getDocument();
                     int oldIndex = dc.getOldIndex();
                     int newIndex = dc.getNewIndex();
                     ClientClass clientClass = documentSnapshot.toObject(ClientClass.class);
+                    checkPrem(clientClass);
                     switch (dc.getType()){
                         case ADDED:
                             client.add(clientClass);
                             break;
                         case MODIFIED:
                             client.set(oldIndex,clientClass);
-                            break;
-                        case REMOVED:
-                            client.remove(oldIndex);
                             break;
                     }
                 }
@@ -138,6 +146,16 @@ public class DisplayFragment extends Fragment {
         });
 
     }
+    private void checkPrem(ClientClass clientClass){
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        Date policyDate = clientClass.getPremDates().get(0);
+        long time = (policyDate.getTime() - today.getTime())/1000;
+        if(time<monthInsec && time>=0) {
+            premClient.add(clientClass);
+        }
+    }
+
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {

@@ -78,7 +78,6 @@ public class SignInFragment extends Fragment {
                 public void onFinish() {
                     Intent i = new Intent(getContext(), MainActivity.class);
                     startActivity(i);
-//                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.stay);
                 }
             }.start();
         }
@@ -140,7 +139,6 @@ public class SignInFragment extends Fragment {
                                     if(user != null) {
                                         Intent i = new Intent(getContext(), MainActivity.class);
                                         startActivity(i);
-//                                        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.stay);
                                     }
                                     else
                                         Toast.makeText(getContext(), "Sign In Failed", Toast.LENGTH_SHORT).show();

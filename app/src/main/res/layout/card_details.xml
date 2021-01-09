@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cons"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="7dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="6dp"
         app:cardBackgroundColor="@color/lightcard"
-        app:cardCornerRadius="15dp"
-        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,13 +25,14 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
+               
+                android:padding="2dp"
                 android:text="Name:"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,8 +40,9 @@
                 android:id="@+id/nameset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
+                android:layout_marginStart="15dp"
+               
+                android:padding="2dp"
                 android:text="Uma"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
@@ -53,45 +53,51 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
+               
+                android:padding="2dp"
                 android:text="Premium Amount:"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
-                app:layout_constraintStart_toStartOf="@+id/name"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <TextView
-                android:id="@+id/phnum"
+                android:id="@+id/prmset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
+                android:layout_marginStart="15dp"
+               
+                android:padding="2dp"
                 android:text="Rs. 26445"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
                 app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
+                app:layout_constraintTop_toTopOf="@+id/textView" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
+                android:layout_marginBottom="5dp"
+               
+                android:padding="2dp"
                 android:text="Next Premium Date:"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <TextView
-                android:id="@+id/premamt"
+                android:id="@+id/nxtdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
-                android:text="26852.00"
+                android:layout_marginStart="15dp"
+               
+                android:padding="2dp"
+                android:text="12/8/2020"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
@@ -101,59 +107,56 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
-                android:text="Ph Number:"
+               
+                android:padding="2dp"
+                android:text="Ph #:"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView5"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toEndOf="@+id/nameset"
-                app:layout_constraintTop_toTopOf="@+id/nameset" />
+                app:layout_constraintStart_toStartOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/phnoset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
+                android:layout_marginStart="10dp"
+               
+                android:padding="2dp"
                 android:text="9840806224"
                 android:textColor="@color/lighttext"
                 android:textSize="17sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/nameset" />
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-            <TextView
-                android:id="@+id/textView6"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
-                android:text="Policy Term:"
-                android:textColor="@color/lighttext"
-                android:textSize="17sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView7"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toEndOf="@+id/phnum"
-                app:layout_constraintTop_toTopOf="@+id/phnum" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:padding="5dp"
-                android:text="20 yrs"
-                android:textColor="@color/lighttext"
-                android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
+                app:layout_constraintStart_toEndOf="@+id/phnoset"
+                app:layout_constraintTop_toTopOf="@+id/textView2">
+
+                <TextView
+                    android:id="@+id/tv_pno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="Policy No: "
+                    android:textColor="@color/lighttext"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/tv_pnoset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                   
+                    android:padding="2dp"
+                    android:text="9840806224"
+                    android:textColor="@color/lighttext"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

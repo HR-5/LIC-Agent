@@ -3,9 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/fui_transparent</item>
+        <item name="colorPrimaryDark">@color/blue2</item>
         <item name="colorAccent">@color/blue</item>
+        <item name="android:textViewStyle">@style/Lato</item>
+    </style>
+
+    <style name="Lato" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/lato</item>
     </style>
 
 </resources>

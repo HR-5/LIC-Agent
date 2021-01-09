@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -32,8 +34,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 
 import java.util.regex.Pattern;
 
@@ -43,7 +50,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 public class SignUpFragment extends Fragment {
     EditText email, password, agent_num, agent_name, phnum;
     String mailid, pass, name;
-    int number, a_num;
+    long number, a_num;
     FirebaseAuth firebaseAuth;
     Button signup;
     TextView signin, hint_btn, hint;
@@ -90,8 +97,8 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 name = agent_name.getText().toString();
-                a_num = Integer.parseInt(agent_num.getText().toString());
-                number = Integer.parseInt(phnum.getText().toString());
+                a_num = Long.parseLong(agent_num.getText().toString());
+                number = Long.parseLong(phnum.getText().toString());
                 mailid = email.getText().toString();
                 InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
                 assert inputMethodManager != null;
@@ -137,16 +144,19 @@ public class SignUpFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isComplete()) {
-                                    Toast.makeText(getContext(), "Signed Up", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Signed Up", Toast.LENGTH_LONG).show();
                                     signinset();
                                 } else
-                                    Toast.makeText(getContext(), "Process Failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Process Failed", Toast.LENGTH_LONG).show();
                             }
                         });
-            } else if (!isValid(mailid))
-                Toast.makeText(getContext(), "Enter Valid Email Id", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(getContext(), "Password should be minimum 6 characters", Toast.LENGTH_SHORT).show();
+            } else if (!isValid(mailid)) {
+                Toast.makeText(getContext(), "Enter Valid Email Id", Toast.LENGTH_LONG).show();
+                alertDialog.dismiss();
+            } else {
+                Toast.makeText(getContext(), "Password should be minimum 6 characters", Toast.LENGTH_LONG).show();
+                alertDialog.dismiss();
+            }
         }
     }
 

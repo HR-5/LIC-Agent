@@ -9,40 +9,52 @@
         android:layout_height="match_parent"
         android:background="@color/lightback">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="6dp"
-            app:cardBackgroundColor="@color/lightcard"
-            app:cardCornerRadius="15dp"
-            app:cardUseCompatPadding="true"
+            android:background="@color/lightback"
+            android:paddingBottom="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerFrameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/attrecycler"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <include layout="@layout/shimmer_placeholder" />
+                    <include layout="@layout/shimmer_placeholder" />
+                    <include layout="@layout/shimmer_placeholder" />
+                    <include layout="@layout/shimmer_placeholder" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/attrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shimmerFrameLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/detail_frame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/blue"
-        android:src="@drawable/add" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

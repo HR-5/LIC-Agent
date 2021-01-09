@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import static com.example.licagent.AddClient.AddDetailFragment.clientClass;
@@ -31,6 +32,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
+        if(dateVal==0 ||dateVal==1) {
+            dialog.getDatePicker().setMaxDate(new Date().getTime());
+        }
         return dialog;
     }
 

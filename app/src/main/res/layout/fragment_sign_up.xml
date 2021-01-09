@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:ems="10"
+                    android:ems="12"
                     android:hint="Agent Name:"
                     app:layout_constraintStart_toStartOf="@+id/agent_num"
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -58,7 +58,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:ems="10"
+                    android:ems="12"
+                    android:inputType="numberSigned"
                     android:hint="Agent Number:"
                     app:layout_constraintStart_toStartOf="@+id/phnum"
                     app:layout_constraintTop_toBottomOf="@+id/agent_name" />
@@ -68,8 +69,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:ems="10"
+                    android:ems="12"
                     android:hint="Phone Number:"
+                    android:inputType="phone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/agent_num" />
@@ -79,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:ems="10"
+                    android:ems="12"
                     android:hint="Email Id:"
                     app:layout_constraintStart_toStartOf="@+id/phnum"
                     app:layout_constraintTop_toBottomOf="@+id/phnum" />
@@ -89,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:ems="10"
+                    android:ems="12"
                     android:hint="Password"
                     app:layout_constraintStart_toStartOf="@+id/email"
                     app:layout_constraintTop_toBottomOf="@+id/email" />

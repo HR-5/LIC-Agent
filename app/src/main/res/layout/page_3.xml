@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:padding="15dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,134 +18,155 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/premamt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Total Installment: \nPremium"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/payterm"
-                app:layout_constraintStart_toStartOf="@+id/payterm"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-            <TextView
-                android:id="@+id/payterm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Paying Term:"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/asssum"
-                app:layout_constraintStart_toStartOf="@+id/asssum"
-                app:layout_constraintTop_toBottomOf="@+id/premamt" />
-
-            <TextView
-                android:id="@+id/asssum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Assured Sum:"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/address"
-                app:layout_constraintEnd_toStartOf="@+id/asssumset"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/payterm" />
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="Address:"
-                android:textColor="@color/lighttext"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/addset"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/asssum" />
-
-            <EditText
-                android:id="@+id/totpremset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="9"
-                android:hint="In Rupees"
-                android:inputType="numberSigned"
-                app:layout_constraintBottom_toBottomOf="@+id/premamt"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toEndOf="@+id/premamt"
-                app:layout_constraintTop_toTopOf="@+id/premamt" />
-
-            <EditText
-                android:id="@+id/paytermset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="9"
-                android:hint="In Months"
-                android:inputType="numberSigned"
-                app:layout_constraintBottom_toBottomOf="@+id/payterm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.2"
-                app:layout_constraintStart_toEndOf="@+id/payterm"
-                app:layout_constraintTop_toTopOf="@+id/payterm" />
-
-            <EditText
-                android:id="@+id/asssumset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="9"
-                android:hint="In Rupees"
-                android:inputType="numberSigned"
-                app:layout_constraintBottom_toBottomOf="@+id/asssum"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/asssum"
-                app:layout_constraintTop_toTopOf="@+id/asssum" />
-
-            <EditText
-                android:id="@+id/addset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="14"
-                android:gravity="top|left"
-                android:hint="Enter Address"
-                android:inputType="textMultiLine"
-                android:lines="3"
-                android:scrollbars="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/totpremset"
-                app:layout_constraintHorizontal_bias="0.51"
-                app:layout_constraintStart_toStartOf="@+id/asssum"
-                app:layout_constraintTop_toBottomOf="@+id/address" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="Page 3 of 3"
                 android:textColor="@color/backc"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="bold" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+
+                <TextView
+                    android:id="@+id/premamt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                   
+                    android:text="Total Installment: \nPremium"
+                    android:textColor="@color/lighttext"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toTopOf="@+id/payterm"
+                    app:layout_constraintStart_toStartOf="@+id/payterm"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <EditText
+                    android:id="@+id/totpremset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="9"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:hint="In Rupees"
+                    android:inputType="numberSigned"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/payterm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   
+                    android:text="Paying Term:"
+                    android:textColor="@color/lighttext"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="20dp"/>
+
+                <EditText
+                    android:id="@+id/paytermset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="In Years"
+                    android:layout_marginLeft="20dp"
+                    android:inputType="numberSigned"
+                    app:layout_constraintBottom_toBottomOf="@+id/payterm"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toEndOf="@+id/payterm"
+                    app:layout_constraintTop_toTopOf="@+id/payterm" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/asssum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assured Sum:"
+                    android:textColor="@color/lighttext"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintBottom_toTopOf="@+id/address"
+                    app:layout_constraintEnd_toStartOf="@+id/asssumset"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/payterm" />
+
+                <EditText
+                    android:id="@+id/asssumset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:hint="In Rupees"
+                    android:inputType="numberSigned"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="30dp">
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   
+                    android:text="Address:"
+                    android:textColor="@color/lighttext"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/addset"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/asssum" />
+
+
+                <EditText
+                    android:id="@+id/addset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="14"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top|left"
+                    android:hint="Enter Address"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:scrollbars="vertical"/>
+
+            </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
