@@ -1,5 +1,7 @@
 package com.example.licagent;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -15,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,7 @@ import java.util.Objects;
 
 import static com.example.licagent.DisplayFragment.disFrame;
 import static com.example.licagent.DisplayFragment.disRecyclerView;
+import static com.example.licagent.MainActivity.flag;
 import static com.example.licagent.MainActivity.viewPagerAdapter;
 import static com.example.licagent.MainActivity.viewPagerMain;
 import static com.example.licagent.NotificationClient.notFrame;
@@ -53,8 +57,9 @@ public class UpdateFragment extends Fragment implements View.OnClickListener {
     boolean edit;
     String name, dob, datecomm, datemat, dueDate, lastDate, address;
     long phnum, plan, polyno, polyterm, payterm, assSum, totPrem;
-    ClientClass clientClass,clientClass2 = new ClientClass();
+    ClientClass clientClass, clientClass2 = new ClientClass();
     long oldId;
+    public LinearLayout btn_layout;
     CollectionReference notebookRef;
     TextView title;
 
@@ -73,10 +78,6 @@ public class UpdateFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("flag", 0);
-        editor.apply();
         String userId = user.getUid();
         notebookRef = db.collection(userId);
         clientClass = new ClientClass();
@@ -107,6 +108,8 @@ public class UpdateFragment extends Fragment implements View.OnClickListener {
         addBtn = v.findViewById(R.id.update);
         backbtn = v.findViewById(R.id.back);
         editbtn = v.findViewById(R.id.edit);
+        btn_layout = v.findViewById(R.id.btn_layout);
+        btn_layout.setVisibility(View.GONE);
         edit = false;
         setEdit();
         setVar();
@@ -189,10 +192,9 @@ public class UpdateFragment extends Fragment implements View.OnClickListener {
         clientClass2.setPayterm(Long.parseLong(paytermset.getText().toString()));
         clientClass2.setTotPrem(Long.parseLong(premamtset.getText().toString()));
         clientClass2.setAssSum(Long.parseLong(assSumset.getText().toString()));
-        if(clientClass.getPolyterm() == clientClass2.getPolyterm() && clientClass.getPayterm() == clientClass2.getPayterm()){
+        if (clientClass.getPolyterm() == clientClass2.getPolyterm() && clientClass.getPayterm() == clientClass2.getPayterm()) {
             clientClass2.setPremDates((ArrayList<Date>) clientClass.getPremDates().clone());
-        }
-        else
+        } else
             calculatePremDates();
         if (oldId != clientClass2.getPolyno())
             notebookRef.document("My clients").collection("Client Data").document(String.valueOf(oldId)).delete();
@@ -273,11 +275,51 @@ public class UpdateFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.back:
                 if (MainActivity.pos == 0) {
-                    disRecyclerView.setVisibility(View.VISIBLE);
-                    disFrame.setVisibility(View.GONE);
+                    flag[0] = 0;
+                    disFrame.animate()
+                            .setDuration(200)
+                            .translationY(viewPagerMain.getHeight())
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    disFrame.setVisibility(View.GONE);
+                                    disRecyclerView.setVisibility(View.VISIBLE);
+                                    disFrame.setTranslationY(-disRecyclerView.getHeight());
+                                    disRecyclerView.animate()
+                                            .setDuration(400)
+                                            .translationY(0)
+                                            .setListener(new AnimatorListenerAdapter() {
+                                                @Override
+                                                public void onAnimationEnd(Animator animation) {
+                                                    super.onAnimationEnd(animation);
+                                                }
+                                            });
+                                }
+                            });
                 } else if (MainActivity.pos == 1) {
-                    notRecyclerview.setVisibility(View.VISIBLE);
-                    notFrame.setVisibility(View.GONE);
+                    flag[1] = 0;
+                    notFrame.animate()
+                            .setDuration(200)
+                            .translationY(viewPagerMain.getHeight())
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    notFrame.setVisibility(View.GONE);
+                                    notRecyclerview.setVisibility(View.VISIBLE);
+                                    notFrame.setTranslationY(-notRecyclerview.getHeight());
+                                    notRecyclerview.animate()
+                                            .setDuration(400)
+                                            .translationY(0)
+                                            .setListener(new AnimatorListenerAdapter() {
+                                                @Override
+                                                public void onAnimationEnd(Animator animation) {
+                                                    super.onAnimationEnd(animation);
+                                                }
+                                            });
+                                }
+                            });
                 }
                 break;
             case R.id.update:

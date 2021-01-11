@@ -36,7 +36,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+
+import static com.example.licagent.MainActivity.clientData;
+import static com.example.licagent.MainActivity.premClient;
 
 public class DisplayFragment extends Fragment {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -45,7 +49,6 @@ public class DisplayFragment extends Fragment {
     ClientAdapter adapter;
     String userId;
     double monthInsec = 30*24*3600;
-    public static ArrayList<ClientClass> premClient = new ArrayList<>();
     public static ArrayList<ClientClass> client = new ArrayList<>();
     public static FrameLayout disFrame;
     public static RecyclerView disRecyclerView;
@@ -67,10 +70,6 @@ public class DisplayFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("flag",2);
-        editor.apply();
         userId = user.getUid();
         notebookRef = db.collection(userId);
         client = new ArrayList<>();
@@ -141,6 +140,7 @@ public class DisplayFragment extends Fragment {
                             break;
                     }
                 }
+                clientData.addAll((Collection<? extends ClientClass>) client.clone());
                 adapter.display(client);
             }
         });

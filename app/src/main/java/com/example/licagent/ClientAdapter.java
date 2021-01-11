@@ -1,5 +1,7 @@
 package com.example.licagent;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -20,15 +22,18 @@ import java.util.Collection;
 
 import static com.example.licagent.DisplayFragment.disFrame;
 import static com.example.licagent.DisplayFragment.disRecyclerView;
+import static com.example.licagent.MainActivity.flag;
+import static com.example.licagent.MainActivity.viewPagerMain;
 import static com.example.licagent.NotificationClient.notFrame;
 import static com.example.licagent.NotificationClient.notRecyclerview;
+
 
 public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ViewHolder> {
     ArrayList<ClientClass> clientClasses;
     Activity context;
     FragmentManager manager;
 
-    public ClientAdapter(Activity context,FragmentManager manager) {
+    public ClientAdapter(Activity context, FragmentManager manager) {
         this.context = context;
         this.manager = manager;
         clientClasses = new ArrayList<>();
@@ -47,7 +52,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ViewHolder
         ClientClass client = clientClasses.get(position);
         String cname = client.getName();
         String cphnum = String.valueOf(client.getPhnum());
-        String cpremamt = "Rs."+ client.getTotPrem();
+        String cpremamt = "Rs." + client.getTotPrem();
         String cpolyno = String.valueOf(client.getPolyno());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String nxtDate = simpleDateFormat.format(client.getPremDates().get(0));
@@ -63,32 +68,80 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ViewHolder
         return clientClasses.size();
     }
 
-    public void display(ArrayList<ClientClass> data){
+    public void display(ArrayList<ClientClass> data) {
         clientClasses.clear();
         clientClasses = new ArrayList<>();
         clientClasses.addAll((Collection<? extends ClientClass>) data.clone());
         this.notifyDataSetChanged();
     }
 
-    public void update(int pos,View view){
-        UpdateFragment fragment = UpdateFragment.newInstance(clientClasses.get(pos));
-        if(MainActivity.pos==0) {
-            disRecyclerView.setVisibility(View.GONE);
-            disFrame.setVisibility(View.VISIBLE);
+    public void update(int pos, View view) {
+        final UpdateFragment fragment = UpdateFragment.newInstance(clientClasses.get(pos));
+        if (MainActivity.pos == 0) {
+            flag[0] = 1;
             manager.beginTransaction()
-                    .replace(R.id.detail_frame,fragment)
+                    .replace(R.id.detail_frame, fragment)
                     .commit();
-        }
-        else if(MainActivity.pos==1){
-            notRecyclerview.setVisibility(View.GONE);
-            notFrame.setVisibility(View.VISIBLE);
+            disFrame.setVisibility(View.INVISIBLE);
+            disRecyclerView.animate()
+                    .setDuration(200)
+                    .translationY(-disRecyclerView.getHeight())
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            disRecyclerView.setVisibility(View.GONE);
+                            fragment.btn_layout.setVisibility(View.VISIBLE);
+                            disFrame.setVisibility(View.VISIBLE);
+                            float height = viewPagerMain.getHeight();
+                            disFrame.setTranslationY(height);
+                            disFrame.animate()
+                                    .setDuration(400)
+                                    .translationY(0)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            super.onAnimationEnd(animation);
+                                            disFrame.setTranslationY(0);
+                                        }
+                                    });
+                        }
+                    });
+        } else if (MainActivity.pos == 1) {
+            flag[1] = 1;
+            notFrame.setVisibility(View.INVISIBLE);
             manager.beginTransaction()
-                    .replace(R.id.prem_frame,fragment)
+                    .replace(R.id.prem_frame, fragment)
                     .commit();
+            notRecyclerview.animate()
+                    .setDuration(200)
+                    .translationY(-notRecyclerview.getHeight())
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            notRecyclerview.setVisibility(View.GONE);
+                            fragment.btn_layout.setVisibility(View.VISIBLE);
+                            notFrame.setVisibility(View.VISIBLE);
+                            float height = viewPagerMain.getHeight();
+                            notFrame.setTranslationY(height);
+                            notFrame.animate()
+                                    .setDuration(400)
+                                    .translationY(0)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            super.onAnimationEnd(animation);
+                                            notFrame.setTranslationY(0);
+                                        }
+                                    });
+                        }
+                    });
         }
     }
-    class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView name,phnum, pnoset,premamt, nxtDate;
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView name, phnum, pnoset, premamt, nxtDate;
         ConstraintLayout constraintLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -104,7 +157,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ViewHolder
                 @Override
                 public void onClick(View view) {
                     int pos = getAdapterPosition();
-                    update(pos,view);
+                    update(pos, view);
                 }
             });
         }

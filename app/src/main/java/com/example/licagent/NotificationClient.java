@@ -18,7 +18,7 @@ import com.example.licagent.Model.ClientClass;
 
 import java.util.ArrayList;
 
-import static com.example.licagent.DisplayFragment.premClient;
+import static com.example.licagent.MainActivity.premClient;
 
 public class NotificationClient extends Fragment {
 
